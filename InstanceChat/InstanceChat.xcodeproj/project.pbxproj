@@ -86,12 +86,8 @@
 			isa = PBXGroup;
 			children = (
 				933A0AB421180FE00020FF29 /* AppDelegate.swift */,
-				933A0AB621180FE00020FF29 /* ViewController.swift */,
-				93581A9B21182C280087683B /* YourBubbleCell.swift */,
-				93581A9D21182C310087683B /* MyBubbleCell.swift */,
-				933A0AB821180FE00020FF29 /* Main.storyboard */,
-				93581A9F21183AB30087683B /* YourBubbleCell.xib */,
-				93581A9921181D1C0087683B /* myBublleCell.xib */,
+				933EBD0721187D6B0098A74B /* Controller */,
+				933EBD0821187D780098A74B /* View */,
 				933A0ABB21180FE10020FF29 /* Assets.xcassets */,
 				933A0ABD21180FE10020FF29 /* LaunchScreen.storyboard */,
 				933A0AC021180FE10020FF29 /* Info.plist */,
@@ -106,6 +102,26 @@
 				933A0ACB21180FE20020FF29 /* Info.plist */,
 			);
 			path = InstanceChatTests;
+			sourceTree = "<group>";
+		};
+		933EBD0721187D6B0098A74B /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				933A0AB621180FE00020FF29 /* ViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		933EBD0821187D780098A74B /* View */ = {
+			isa = PBXGroup;
+			children = (
+				933A0AB821180FE00020FF29 /* Main.storyboard */,
+				93581A9B21182C280087683B /* YourBubbleCell.swift */,
+				93581A9D21182C310087683B /* MyBubbleCell.swift */,
+				93581A9F21183AB30087683B /* YourBubbleCell.xib */,
+				93581A9921181D1C0087683B /* myBublleCell.xib */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

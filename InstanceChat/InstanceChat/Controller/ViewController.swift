@@ -55,7 +55,7 @@ extension ViewController{
         
         let keyboardFrema = notiInfo[UIKeyboardFrameEndUserInfoKey] as! CGRect
         let height = keyboardFrema.size.height
-        self.inputviewBottomMargin.constant = -height
+        self.inputviewBottomMargin.constant = -height// 키보드 사이즈만큼 해당 유아이가 올라감.
         let keyboardDuration = notiInfo[UIKeyboardAnimationDurationUserInfoKey] as! TimeInterval
         UIView.animate(withDuration: keyboardDuration) {
             // animation, frema 을 실시간으로 적용할때 무조건 필요함
@@ -83,6 +83,7 @@ extension ViewController{
             //layout 이 잘 안가는경우에, 아래의 녀석을 호출하고 이동시켜보자.
             self.view.layoutIfNeeded()
             //원하는 tableView의 low로 이동하는
+            // 전송을 누르면 마지막에 추가된 텍스트로 포커스를 맞춰 스크롤
             tableView.scrollToRow(at: lastIndexPath, at: UITableViewScrollPosition.bottom, animated: false)
             
         }
@@ -138,8 +139,8 @@ extension ViewController: UITextViewDelegate {
     // textView에 글자를 작성할때마다 호출되는 녀석
     func textViewDidChange(_ textView: UITextView) {
         print("같은 함수 한번더 호출")
-        if textView.contentSize.height <= 83 {
-            inputTextViewHeight.constant = textView.contentSize.height
+        if textView.contentSize.height <= 83 {// 입력할때 높이 값이 83 미만일경우 동일하게
+            inputTextViewHeight.constant = textView.contentSize.height// 텍스트의 높이를 동일하게 유지, 스크롤이 생성 되더라도.
             textView.setContentOffset(CGPoint.zero, animated: true)
         }
     }
