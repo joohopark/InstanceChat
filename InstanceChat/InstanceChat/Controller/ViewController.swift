@@ -2,6 +2,11 @@ import UIKit
 import Firebase
 import GoogleSignIn
 import SocketIO
+//192.168.0.34
+let manager = SocketManager(socketURL: URL(string: "192.168.0.34:8080")!, config: [.log(false), .compress])
+let socket = manager.defaultSocket
+
+
 
 //MARK :- IBOutlet & TestSet
 class ViewController: UIViewController {
@@ -25,6 +30,14 @@ class ViewController: UIViewController {
 extension ViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
+        socket.on("connect") { data, ack in
+            print("===============================socket connect!!!!!!!!!!!!!!!!!!================")
+            socket.emit("adduser", Usertoken!)
+            
+        }
+        
+        socket.connect()
+
         inputTextView.delegate = self
         tableView.register(UINib(nibName: "myBublleCell", bundle: nil),
                            forCellReuseIdentifier: "MyCell")
@@ -44,6 +57,7 @@ extension ViewController{
                                                selector: #selector(self.keyboardWillHide(noti:)) ,
                                                name: NSNotification.Name.UIKeyboardWillHide,
                                                object: nil)
+        
         
     }
     
@@ -83,6 +97,11 @@ extension ViewController{
 
     @IBAction func testInputDone(_ sender: UIButton) {
         if inputTextView.text.isEmpty != true {
+            
+            socket.emit("sendchat", inputTextView.text);
+
+            
+            
             chatData.append(inputTextView.text)
             inputTextView.text = ""
             self.tableView.reloadData()
@@ -91,7 +110,7 @@ extension ViewController{
             //layout 이 잘 안가는경우에, 아래의 녀석을 호출하고 이동시켜보자.
             self.view.layoutIfNeeded()
             //원하는 tableView의 low로 이동하는
-            // 전송을 누르면 마지막에 추가된 텍스트로 포커스를 맞춰 스크롤
+            // 전송을 누르면 마지막에 추가된 텍스트로 포커스를 맞춰 스크롤 - 채팅의 마지막 부분만 보인다.
             tableView.scrollToRow(at: lastIndexPath, at: UITableViewScrollPosition.bottom, animated: false)
             
         }
