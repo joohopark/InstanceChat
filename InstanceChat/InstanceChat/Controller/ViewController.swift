@@ -3,7 +3,7 @@ import Firebase
 import GoogleSignIn
 import SocketIO
 //192.168.0.34
-let manager = SocketManager(socketURL: URL(string: "192.168.0.34:8080")!, config: [.log(false), .compress])
+let manager = SocketManager(socketURL: URL(string: "http://localhost:8080")!, config: [.log(false), .compress])
 let socket = manager.defaultSocket
 
 
@@ -30,13 +30,17 @@ class ViewController: UIViewController {
 extension ViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
+//        print("Socket 연결 전=============================================================]")
         socket.on("connect") { data, ack in
             print("===============================socket connect!!!!!!!!!!!!!!!!!!================")
-            socket.emit("adduser", Usertoken!)
-            
+            socket.emit("adduser", "ㅇㄴㄴㅇㄹㄴㄹ")
+
         }
         
+
         socket.connect()
+
+
 
         inputTextView.delegate = self
         tableView.register(UINib(nibName: "myBublleCell", bundle: nil),
@@ -119,18 +123,19 @@ extension ViewController{
         
     }
     @IBAction func testLogout(_ sender: Any){
-       // log out
-        try! Auth.auth().signOut()
-        // check log out
-        let user = Auth.auth().currentUser
-        
-        if user != nil {
-            print("User is signed in.")
-            print(user?.displayName! ?? "")
-            print(user?.photoURL! ?? "")
-        } else {
-            print("No user is signed in.")
-        }
+//       // log out
+//        try! Auth.auth().signOut()
+//        // check log out
+//        let user = Auth.auth().currentUser
+//
+//        if user != nil {
+//            print("User is signed in.")
+//            print(user?.displayName! ?? "")
+//            print(user?.photoURL! ?? "")
+//        } else {
+//            print("No user is signed in.")
+//        }
+
     }
 }
 
