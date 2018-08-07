@@ -1,4 +1,7 @@
 import UIKit
+import Firebase
+import GoogleSignIn
+import SocketIO
 
 //MARK :- IBOutlet & TestSet
 class ViewController: UIViewController {
@@ -44,8 +47,13 @@ extension ViewController{
         
     }
     
+//    override func loadViewIfNeeded() {
+//        super.loadViewIfNeeded()
+//        self.navigationController?.hideNavigationBar()
+//    }
 }
 
+// MARK :- keyboard Noti , IBAction
 extension ViewController{
     @objc private func keyboardWillShow(noti: NSNotification) {
         // userInfo 값을 가져옴
@@ -90,6 +98,20 @@ extension ViewController{
         //같은 함수 한번더 호출해서 해결
         textViewDidChange(inputTextView)
         
+    }
+    @IBAction func testLogout(_ sender: Any){
+       // log out
+        try! Auth.auth().signOut()
+        // check log out
+        let user = Auth.auth().currentUser
+        
+        if user != nil {
+            print("User is signed in.")
+            print(user?.displayName! ?? "")
+            print(user?.photoURL! ?? "")
+        } else {
+            print("No user is signed in.")
+        }
     }
 }
 
